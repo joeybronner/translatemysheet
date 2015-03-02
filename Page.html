@@ -1,0 +1,46 @@
+<html>
+<link rel="stylesheet"
+	href="https://ssl.gstatic.com/docs/script/css/add-ons.css">
+    <body bgcolor="#A5D6A7">
+	<font color="white"> <!-- Header -->
+		<center>
+			<img src="http://i57.tinypic.com/x0o8pf.png" /> <br> <br>
+			<!-- Body -->
+            <!-- <form> -->
+			<div class="inline form-group" align="left">
+				<label for="sourceLanguage"><b>Source</b> Language</label>
+                <select	id="sourceLanguage">
+					<option value="" selected>Auto detect</option>
+					<option value="en">English</option>
+					<option value="fr">French</option>
+					<option value="es">Spanish</option>
+				</select>
+			</div>
+			<img align="center" src="http://img11.hostingpics.net/pics/179764forward18.png" />
+			<div class="inline form-group">
+				<label for="targetLanguage"><b>Target</b> Language</label>
+                <select id="targetLanguage">
+					<option value="en" selected>English</option>
+					<option value="fr">French</option>
+					<option value="es">Spanish</option>
+				</select>
+			</div><br>
+            <div class="inline form-group" align="left">
+            <!-- <form name="translationType"> -->
+               <input type="radio" id="radioFull" name="translationType" value="full" /> Full sheet translation<br>
+               <input type="radio" id="radioSelected" name="translationType" value="selected" checked /> Selected cell(s) translation<br>
+            <!-- </form> -->
+            </div><br><br>
+            <button class="action" onclick="return google.script.run.translate(radioFull.checked, radioSelected.checked, sourceLanguage.options[sourceLanguage.selectedIndex].value, targetLanguage.options[targetLanguage.selectedIndex].value);">Translate</button>
+            <!-- </form> -->
+            </center>
+	</font>
+	<!-- Footer -->
+	<div class="sidebar bottom">
+		<img
+			src="http://icons.iconarchive.com/icons/marcus-roberto/google-play/512/Google-Translate-icon.png"
+			height="16" width="16" /> <span class="gray">Translate by
+			Google</span>
+	</div>
+</body>
+</html>
