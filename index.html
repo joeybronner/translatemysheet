@@ -27,8 +27,8 @@
 			</div><br>
             <div class="inline form-group" align="left">
             <!-- <form name="translationType"> -->
-               <input type="radio" id="radioFull" name="translationType" value="full" /> Full sheet translation<br>
-               <input type="radio" id="radioSelected" name="translationType" value="selected" checked /> Selected cell(s) translation<br>
+               <input type="radio" id="radioFull" name="translationType" value="full" /> Full sheet<br>
+               <input type="radio" id="radioSelected" name="translationType" value="selected" checked /> Selected cell(s)<br>
             <!-- </form> -->
             </div><br><br>
             <button class="action" onclick="return google.script.run.translate(radioFull.checked, radioSelected.checked, sourceLanguage.options[sourceLanguage.selectedIndex].value, targetLanguage.options[targetLanguage.selectedIndex].value);">Translate</button>
