@@ -8,7 +8,7 @@
 function onOpen() {
     SpreadsheetApp.getUi() // (or DocumentApp or FormApp)
         .createMenu('Translate my sheet')
-        .addItem('Start translating', 'showSidebar')
+        .addItem('Open right panel to start a new translation', 'showSidebar')
         .addSeparator()
         .addItem('About this add-on?', 'showAbout')
         .addToUi();
@@ -33,8 +33,8 @@ function showAbout() {
   var html = HtmlService.createHtmlOutputFromFile('about')
       .setSandboxMode(HtmlService.SandboxMode.IFRAME)
       .setTitle('About')
-      .setWidth(650)
-      .setHeight(300);
+      .setWidth(250)
+      .setHeight(450);
   SpreadsheetApp.getActive().show(html);
 }
 
@@ -89,31 +89,5 @@ function translateSelectedCells(activeSpreadsheet, sourceLangage, targetLangage)
     if (activeCellText != "") {
         var activeCellTranslation = LanguageApp.translate(activeCellText, sourceLangage, targetLangage);
         SpreadsheetApp.getActiveSpreadsheet().getActiveSheet().getActiveCell().setValue(activeCellTranslation);
-    }
-}
-
-/**
- *
- * OTHER METHODS / FUNCTIONS. (can be deleted)
- *
- **/
-function showAlert() {
-    var ui = SpreadsheetApp.getUi(); // Same variations
-    var result = ui.alert(
-        "Title",
-        "That's a nice question?",
-        ui.ButtonSet.YES_NO);
-
-    // Process the user's response.
-    if (result == ui.Button.YES) {
-        ui.alert('Confirmation received.');
-    } else {
-        ui.alert('Permission denied.');
-    }
-}
-
-function sendEmailToJoeyBronner() {
-    if (GmailApp.sendEmail('joeybronner@gmail.com', '[TranslateMySheet]', 'Corps du message')) {
-        SpreadsheetApp.getActiveSpreadsheet().toast("Email sent.", "Thank's", 4);
     }
 }
