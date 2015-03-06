@@ -6,11 +6,10 @@
  *
  **/
 function onOpen() {
-    SpreadsheetApp.getUi() // (or DocumentApp or FormApp)
-        .createMenu('Translate my sheet')
-        .addItem('Open right panel to start a new translation', 'showSidebar')
-        .addSeparator()
-        .addItem('About this add-on?', 'showAbout')
+    SpreadsheetApp.getUi()
+        .createAddonMenu()
+        .addItem('Start a new translation', 'showSidebar')
+        .addItem('About', 'showAbout')
         .addToUi();
 }
 
@@ -81,13 +80,18 @@ function translateFullPage(activeSpreadsheet, sourceLangage, targetLangage) {
 
 /**
  *
- * Code for translate only selected cells content in a sheet from a source to a target langage. 
+ * Code for translate only selected range content in a sheet from a source to a target langage. 
  *
  **/
 function translateSelectedCells(activeSpreadsheet, sourceLangage, targetLangage) {
-    var activeCellText = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet().getActiveCell().getValue();
-    if (activeCellText != "") {
+    var range = SpreadsheetApp.getActiveSheet().getActiveRange();
+    var numRows = range.getNumRows();
+    var numCols = range.getNumColumns();
+    for (var i = 1; i <= numRows; i++) {
+      for (var j = 1; j <= numCols; j++) {
+        var activeCellText = range.getCell(i,j).getValue();
         var activeCellTranslation = LanguageApp.translate(activeCellText, sourceLangage, targetLangage);
-        SpreadsheetApp.getActiveSpreadsheet().getActiveSheet().getActiveCell().setValue(activeCellTranslation);
+        range.getCell(i,j).setValue(activeCellTranslation);
+      }
     }
 }
