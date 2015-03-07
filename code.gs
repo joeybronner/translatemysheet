@@ -21,7 +21,7 @@ function onOpen() {
 function showSidebar() {
     var html = HtmlService.createHtmlOutputFromFile('index')
         .setSandboxMode(HtmlService.SandboxMode.IFRAME)
-        .setTitle('Translate my sheet')
+        .setTitle('Translate My Sheet')
         .setWidth(300);
 
     // Open sidebar
