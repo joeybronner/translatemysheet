@@ -1,5 +1,16 @@
 /**
  *
+ * OnInstall method.
+ *
+ * Necessary for the menu items to populate the first time after the add-on is installed.
+ *
+ **/
+function onInstall(e) {
+  onOpen(e);
+}
+
+/**
+ *
  * Toolbar menu creation.
  *
  * Called on worbook opening.
