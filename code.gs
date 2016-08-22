@@ -53,20 +53,39 @@ function showAbout() {
  * Sidebar title, content & size.
  *
  **/
-function translate(radioFull, radioSelected, sourceLangage, targetLangage) {
-    SpreadsheetApp.getActiveSpreadsheet().toast("Translation in progress...", "", -1);
+function translate(radioFull, radioSelected, radioOgSheet, radioNewSheet, sourceLangage, targetLangage) {
+    var activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+    var activeSheet = activeSpreadsheet.getActiveSheet();
+    var activeRange = activeSheet.getActiveRange().getA1Notation();
+    activeSpreadsheet.toast("Translation in progress...", "", -1);
     try {
-        var activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-        var activeSheet = activeSpreadsheet.getActiveSheet();
+        
+        if (radioOgSheet) {
+			var targetSheet = activeSheet
+		} else if (radioNewSheet) {
+			var newName = activeSheet.getName() + " - " + targetLangage;
+			if (activeSpreadsheet.getSheetByName(newName)) {
+				var sheets = activeSpreadsheet.getSheets();
+				var counter = 1;
+				for (var i=0; i<sheets.length; i++) {
+					if (sheets[i].getName().indexOf(newName) != -1) {
+						counter++;
+					}
+				}
+				newName += counter;
+			}
+			var targetSheet = activeSpreadsheet.duplicateActiveSheet().setName(newName);
+			targetSheet.setTabColor("1E824C");
+		}
         var activeCell = activeSheet.getActiveCell();
         if (radioFull) {
-            translateFullPage(activeSpreadsheet, sourceLangage, targetLangage);
+            translateFullPage(targetSheet, sourceLangage, targetLangage);
         } else if (radioSelected) {
-            translateSelectedCells(activeSpreadsheet, sourceLangage, targetLangage);
+            translateSelectedCells(targetSheet, activeRange, sourceLangage, targetLangage);
         }
-        SpreadsheetApp.getActiveSpreadsheet().toast("Done.", "", 3);
+        activeSpreadsheet.toast("Done.", "", 3);
     } catch (err) {
-      SpreadsheetApp.getActiveSpreadsheet().toast("An error occured:" + err);
+      activeSpreadsheet.toast("An error occured:" + err);
     }
 }
 
@@ -75,15 +94,15 @@ function translate(radioFull, radioSelected, sourceLangage, targetLangage) {
  * Code for translate full page content from a source to a target langage. 
  *
  **/
-function translateFullPage(activeSpreadsheet, sourceLangage, targetLangage) {
-    var lrow = activeSpreadsheet.getLastRow();
-    var lcol = activeSpreadsheet.getLastColumn();
+function translateFullPage(targetSheet, sourceLangage, targetLangage) {
+    var lrow = targetSheet.getLastRow();
+    var lcol = targetSheet.getLastColumn();
     for (var i = 1; i <= lrow; i++) {
         for (var j = 1; j <= lcol; j++) {
-            if (SpreadsheetApp.getActiveSpreadsheet().getActiveSheet().getRange(i, j).getValue() != "") {
-                var activeCellText = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet().getRange(i, j).getValue();
+            if (targetSheet.getRange(i, j).getValue() != "") {
+                var activeCellText = targetSheet.getRange(i, j).getValue();
                 var activeCellTranslation = LanguageApp.translate(activeCellText, sourceLangage, targetLangage);
-                SpreadsheetApp.getActiveSpreadsheet().getActiveSheet().getRange(i, j).setValue(activeCellTranslation);
+                targetSheet.getRange(i, j).setValue(activeCellTranslation);
             }
         }
     }
@@ -94,8 +113,8 @@ function translateFullPage(activeSpreadsheet, sourceLangage, targetLangage) {
  * Code for translate only selected range content in a sheet from a source to a target langage. 
  *
  **/
-function translateSelectedCells(activeSpreadsheet, sourceLangage, targetLangage) {
-    var range = SpreadsheetApp.getActiveSheet().getActiveRange();
+function translateSelectedCells(targetSheet, activeRange, sourceLangage, targetLangage) {
+    var range = targetSheet.getRange(activeRange);
     var numRows = range.getNumRows();
     var numCols = range.getNumColumns();
     for (var i = 1; i <= numRows; i++) {
@@ -103,6 +122,8 @@ function translateSelectedCells(activeSpreadsheet, sourceLangage, targetLangage)
         var activeCellText = range.getCell(i,j).getValue();
         var activeCellTranslation = LanguageApp.translate(activeCellText, sourceLangage, targetLangage);
         range.getCell(i,j).setValue(activeCellTranslation);
+        range.getCell(i,j).setBackground("#1E824C");
+        range.getCell(i,j).setFontColor("#FFFFFF");
       }
     }
 }
