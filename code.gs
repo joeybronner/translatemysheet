@@ -24,6 +24,27 @@ function onOpen() {
         .addToUi();
 }
 
+/*
+* Example function for Google Analytics Measurement Protocol.
+* @param {string} tid Tracking ID / Web Property ID
+* @param {string} url Document location URL
+*/
+function sendGAMP(tid, url){
+  var data = {'v': '1',
+                 'tid': tid,
+                 'cid': Utilities.getUuid(),
+                 'z': Math.floor(Math.random()*10E7),
+                 't':'pageview',
+                 'dl': url };
+  var payload = Object.keys(data).map(function(key) {
+                                        return encodeURIComponent(key) + '=' + encodeURIComponent(data[key]);
+                                    }).join('&');
+  var options = {'method' : 'POST',
+                 'payload' : payload };
+  
+  UrlFetchApp.fetch('http://www.google-analytics.com/collect', options); 
+}
+
 /**
  *
  * Sidebar title, content & size.
@@ -50,7 +71,7 @@ function showAbout() {
 
 /**
  *
- * Sidebar title, content & size.
+ * Translate function.
  *
  **/
 function translate(radioFull, radioSelected, radioOgSheet, radioNewSheet, sourceLangage, targetLangage) {
@@ -59,24 +80,23 @@ function translate(radioFull, radioSelected, radioOgSheet, radioNewSheet, source
     var activeRange = activeSheet.getActiveRange().getA1Notation();
     activeSpreadsheet.toast("Translation in progress...", "", -1);
     try {
-        
         if (radioOgSheet) {
-			var targetSheet = activeSheet
-		} else if (radioNewSheet) {
-			var newName = activeSheet.getName() + " - " + targetLangage;
-			if (activeSpreadsheet.getSheetByName(newName)) {
-				var sheets = activeSpreadsheet.getSheets();
-				var counter = 1;
-				for (var i=0; i<sheets.length; i++) {
-					if (sheets[i].getName().indexOf(newName) != -1) {
-						counter++;
-					}
-				}
-				newName += counter;
-			}
-			var targetSheet = activeSpreadsheet.duplicateActiveSheet().setName(newName);
-			targetSheet.setTabColor("1E824C");
-		}
+      var targetSheet = activeSheet
+    } else if (radioNewSheet) {
+      var newName = activeSheet.getName() + " - " + targetLangage;
+      if (activeSpreadsheet.getSheetByName(newName)) {
+        var sheets = activeSpreadsheet.getSheets();
+        var counter = 1;
+        for (var i=0; i<sheets.length; i++) {
+          if (sheets[i].getName().indexOf(newName) != -1) {
+            counter++;
+          }
+        }
+        newName += counter;
+      }
+      var targetSheet = activeSpreadsheet.duplicateActiveSheet().setName(newName);
+      targetSheet.setTabColor("1E824C");
+    }
         var activeCell = activeSheet.getActiveCell();
         if (radioFull) {
             translateFullPage(targetSheet, sourceLangage, targetLangage);

@@ -1,9 +1,29 @@
+<!doctype html>
 <html>
-<link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons.css">
+<head>
+     <meta charset="utf-8">
+     <link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons.css">
+     <style type="text/css">
+        body {
+          color: white;
+        }
+        .top-logo {margin-bottom:50px;}
+     </style>
+     <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-74685517-1', 'auto');
+        ga('send', 'pageview');
+     </script>
+</head>
 <body bgcolor="#1E824C">
 <center>
-    <font color="white"> <!-- Header -->
-     <img src="http://joeybronner.fr/translatemysheet/tms_white.png" width="250px" /> <br><br><br>
+     <!-- Header -->
+     <img src="http://joeybronner.fr/translatemysheet/tms_white.png" width="250px" />
+
      <!-- Body -->
      <div class="inline form-group" align="left">
           <label for="sourceLanguage"><b>Source</b> Language</label>
@@ -123,7 +143,37 @@
                <option value="ga">Irish</option>
                <option value="ja">Japenese</option>
                <option value="kn">Kannada</option>
-               <option value="km">Khmer</option>
+               <option value="km">Khmer</option><!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link href="https://ssl.gstatic.com/docs/script/css/add-ons.css" rel="stylesheet">
+    <style type="text/css">
+        /* my custom style */
+    </style>
+</head>
+<body>
+    <div style="text-align: center">
+        <img src="http://joeybronner.fr/translatemysheet/tms_black.png"><br>
+
+        <p style="text-align: justify">Translate my sheet is <i>(as its name
+        implies)</i> an add-on created to <b>translate your spreadsheet</b>
+        cell by cell or fully in one click.<br><br>
+        It uses the Google Translate API and supports more than <b>100
+        languages</b>.</p>
+        <hr>
+        <br>
+        <img src=
+        "http://www.fastly.com/img/customers/casestudy/github_logo.png" width=
+        "80"><br><br>
+        You can find and contribute at the source code on <a href=
+        "http://github.com/joeybronner/TranslateMySheet" target=
+        "_blank">GitHub</a>.<br>
+        Developed by <a href="http://joeybronner.fr" target="_blank">Joey
+        Bronner</a>
+    </div>
+</body>
+</html>
                <option value="ko">Korean</option>
                <option value="lo">Lao</option>
                <option value="la">Latin</option>
@@ -160,21 +210,26 @@
           </select>
      </div><br><br><br>
      <div class="inline form-group" align="left">
-		  <p><b>Chose which values you would like to have translated.</b></p>
-          <label unselectable="on"><input type="radio" id="radioFull" name="translationType" value="full" /> Full sheet<br></label>
-          <label unselectable="on"><input type="radio" id="radioSelected" name="translationType" value="selected" checked /> Selected range<br></label>
-          <p><b>Select where you would like the translations to be created.</b>
-          <br><br><b>'Original sheet'</b> will <b>overwrite</b> the original values with the translations.
-          <br><br><b>'New sheet'</b> will first create a duplicate work sheet and apply the translations there preserving the original.</p>
-          <label unselectable="on"><input type="radio" id="radioOgSheet" name="translationTarget" value="original" /> Original sheet<br></label>
-          <label unselectable="on"><input type="radio" id="radioNewSheet" name="translationTarget" value="new" checked /> New sheet<br></label>
+
+    <p style="text-align:center;"><b>Which values would you like translate?</b></p>
+        <div style="text-align:center;width:100%;">
+        <label unselectable="on"><input type="radio" id="radioFull" name="translationType" value="full" /> Full sheet<br></label>
+        <label unselectable="on"><input type="radio" id="radioSelected" name="translationType" value="selected" checked /> Selected range<br></label>
+        </div>
+
+          <p style="text-align:center;"><b>Override original cells or work with duplicate cells to a new sheet?</b></p>
+          <!--<br><br><b>'Original sheet'</b> will <b>overwrite</b> the original values with the translations.-->
+          <!--<br><br><b>'New sheet'</b> will first create a duplicate work sheet and apply the translations there preserving the original.-->
+          <div style="text-align:center;width:100%;">
+          <label unselectable="on"><input type="radio" id="radioOgSheet" name="translationTarget" value="original" /> Override cells<br></label>
+          <label unselectable="on"><input type="radio" id="radioNewSheet" name="translationTarget" value="new" checked /> Duplicate sheet<br></label>
+          </div>
      </div><br><br><br>
      <button class="action" style="width:200px;height:40px" onclick="return google.script.run.translate(radioFull.checked, radioSelected.checked, radioOgSheet.checked, radioNewSheet.checked, sourceLanguage.options[sourceLanguage.selectedIndex].value, targetLanguage.options[targetLanguage.selectedIndex].value);">Translate</button>    
      <!-- Footer -->
      <div class="sidebar bottom" style="width:97%;">
          <img src="http://joeybronner.fr/translatemysheet/translatemysheetinlinemini.png" />
      </div>
-</font>
 </center>
 </body>
 </html>
