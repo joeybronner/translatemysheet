@@ -208,10 +208,10 @@
                <option value="yo">Yoruba</option>
                <option value="zu">Zulu</option>
           </select>
-     </div><br><br><br>
-     <div class="inline form-group" align="left">
+     </div>
 
-    <p style="text-align:center;"><b>Which values would you like translate?</b></p>
+     <div class="inline form-group" style="margin: 10px 0px 10px 0px;" align="left">
+          <p style="text-align:center;"><b>Which values would you like translate?</b></p>
         <div style="text-align:center;width:100%;">
         <label unselectable="on"><input type="radio" id="radioFull" name="translationType" value="full" /> Full sheet<br></label>
         <label unselectable="on"><input type="radio" id="radioSelected" name="translationType" value="selected" checked /> Selected range<br></label>
@@ -224,10 +224,13 @@
           <label unselectable="on"><input type="radio" id="radioOgSheet" name="translationTarget" value="original" /> Override cells<br></label>
           <label unselectable="on"><input type="radio" id="radioNewSheet" name="translationTarget" value="new" checked /> Duplicate sheet<br></label>
           </div>
-     </div><br><br><br>
-     <button class="action" style="width:200px;height:40px" onclick="return google.script.run.translate(radioFull.checked, radioSelected.checked, radioOgSheet.checked, radioNewSheet.checked, sourceLanguage.options[sourceLanguage.selectedIndex].value, targetLanguage.options[targetLanguage.selectedIndex].value);">Translate</button>    
+     </div>
+
      <!-- Footer -->
-     <div class="sidebar bottom" style="width:97%;">
+     <div style="margin: 10px 0px 10px 0px;">
+         <button class="action" style="width:200px;height:40px" onclick="return google.script.run.translate(radioFull.checked, radioSelected.checked, radioOgSheet.checked, radioNewSheet.checked, sourceLanguage.options[sourceLanguage.selectedIndex].value, targetLanguage.options[targetLanguage.selectedIndex].value);">Translate</button>
+     </div>
+     <div style="width:97%;margin: 10px 0px 10px 0px;">
          <img src="http://joeybronner.fr/translatemysheet/translatemysheetinlinemini.png" />
      </div>
 </center>
