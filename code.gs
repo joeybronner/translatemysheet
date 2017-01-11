@@ -125,6 +125,7 @@ function translateFullPage(targetSheet, sourceLangage, targetLangage) {
         for (var j = 1; j <= lcol; j++) {
             if (targetSheet.getRange(i, j).getValue() != "") {
                 var activeCellText = targetSheet.getRange(i, j).getValue();
+                // TODO: here, wrap the call in a try catch
                 var activeCellTranslation = LanguageApp.translate(activeCellText, sourceLangage, targetLangage);
                 targetSheet.getRange(i, j).setValue(activeCellTranslation);
             }
@@ -144,6 +145,7 @@ function translateSelectedCells(targetSheet, activeRange, sourceLangage, targetL
     for (var i = 1; i <= numRows; i++) {
         for (var j = 1; j <= numCols; j++) {
             var activeCellText = range.getCell(i, j).getValue();
+            // TODO: here, wrap the call in a try catch
             var activeCellTranslation = LanguageApp.translate(activeCellText, sourceLangage, targetLangage);
             range.getCell(i, j).setValue(activeCellTranslation);
             range.getCell(i, j).setBackground("#1E824C");

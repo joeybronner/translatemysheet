@@ -17,3 +17,13 @@ Two options are available:
  - Translate your selected range
  - Translate your entire sheet
 
+## Interisting links
+
+ - https://ctrlq.org/code/19909-google-translate-api
+ - https://gist.github.com/rcknr/4408646
+ - https://developers.google.com/apps-script/reference/language/language-app
+
+## List of supported languages by Google
+
+ - https://cloud.google.com/translate/docs/languages
+
